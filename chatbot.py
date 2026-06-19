@@ -51,15 +51,9 @@ if not st.session_state.user_name:
     
     # --- ENTER BUTTON FIX ---
     # Streamlit Form use chesthe Enter nokkina, button click chesina perfect ga work avthundi
-    with st.form(key="login_form"):
+with st.form(key="login_form"):
         name_input = st.text_input("Enter your name profile to connect:")
-        submit_button = st.form_submit_button(label="Initialize Chat")
-        
-        if (submit_button or name_input) and name_input.strip() and len(name_input.get(name_input, '')) == 0:
-            # Ee condition short-circuit form input automatically trigger chesthundhi
-            pass
-
-    # Form submission logic handler
+        submit_button = st.form_submit_button(label="Initialize Chat")    # Form submission logic handler
     if submit_button and name_input.strip():
         st.session_state.user_name = name_input.strip()
         st.session_state.messages.append({"role": "assistant", "text": f"Connect established! Welcome **{st.session_state.user_name}**! Type 'hi' or 'help' to start."})
