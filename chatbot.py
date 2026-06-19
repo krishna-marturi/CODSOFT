@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
-
+# --- TIMEZONE FIX ---
 # Cloud server time ni direct ga India time (+5:30 hours) loki convert chestunnam
 utc_now = datetime.utcnow()
 ist_now = utc_now + timedelta(hours=5, minutes=30)
@@ -14,6 +14,7 @@ rules = {
     "ml": (["machine learning", "ml"], "📊 **ML:** A branch of AI where models learn pattern sets automatically from old data."),
     "help": (["help", "menu", "options"], "💡 Ask me about: *Greetings, Name, College, Python, AI, ML, Internship, or Time*. Type *'bye'* to exit.")
 }
+
 # --- 2. CORE BRAIN FUNCTION ---
 def get_bot_response(user_text, name):
     """Processes rules pattern matching and returns custom response strings."""
@@ -27,11 +28,11 @@ def get_bot_response(user_text, name):
 💼 **Internship:** A short program where students work on real projects to build practical skills before a real job.
 🚀 **CodSoft Internship:** A virtual platform providing hands-on tasks, where this Chatbot is Task 1 to build your software portfolio, {name}!
         """
-    # Dynamic Date & Time System Call
+   # --- TIME FIX APPLIED HERE ---
+    # datetime.now() ni thesesi ist_now ni use chesthunnam
     if any(k in clean_input for k in ["date", "time", "clock", "day"]):
-        return f"⏰ **System Clock:** Hello {name}, the current system status is: `{datetime.now().strftime('%A, %B %d, %Y at %I:%M %p')}`"
-        
-    # Dictionary lookup matching loops
+        return f"⏰ **System Clock:** Hello {name}, the current system status is: `{ist_now.strftime('%A, %B %d, %Y at %I:%M %p')}`"
+         # Dictionary lookup matching loops
     for topic, (keywords, reply) in rules.items():
         if any(k in clean_input for k in keywords):
             return reply.format(name=name)
@@ -47,8 +48,19 @@ if "messages" not in st.session_state: st.session_state.messages = []
 # Phase 1: Login Check Layout
 if not st.session_state.user_name:
     st.write("### 💻 System Login initialization:")
-    name_input = st.text_input("Enter your name profile to connect:")
-    if st.button("Initialize Chat") and name_input.strip():
+    
+    # --- ENTER BUTTON FIX ---
+    # Streamlit Form use chesthe Enter nokkina, button click chesina perfect ga work avthundi
+    with st.form(key="login_form"):
+        name_input = st.text_input("Enter your name profile to connect:")
+        submit_button = st.form_submit_button(label="Initialize Chat")
+        
+        if (submit_button or name_input) and name_input.strip() and len(name_input.get(name_input, '')) == 0:
+            # Ee condition short-circuit form input automatically trigger chesthundhi
+            pass
+
+    # Form submission logic handler
+    if submit_button and name_input.strip():
         st.session_state.user_name = name_input.strip()
         st.session_state.messages.append({"role": "assistant", "text": f"Connect established! Welcome **{st.session_state.user_name}**! Type 'hi' or 'help' to start."})
         st.rerun()
