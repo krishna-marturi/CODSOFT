@@ -1,5 +1,13 @@
 import streamlit as st
 from datetime import datetime
+import zoneinfo
+
+# Directly get Indian Standard Time (IST)
+try:
+    ist_zone = zoneinfo.ZoneInfo("Asia/Kolkata")
+    now = datetime.now(ist_zone)
+except Exception:
+    now = datetime.now() # Fallback
 # --- 1. CORE DICTIONARY (Standard Pattern Matching) ---
 rules = {
     "greetings": (["hi", "hello", "hey", "hii"], "👋 Hello {name}! How can I help you today?"),
