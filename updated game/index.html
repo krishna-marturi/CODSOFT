@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>AI Tic-Tac-Toe</h1>
+
+    <div class="scoreboard">
+
+        <div class="score-card">
+            <span>PLAYER (X)</span>
+            <h2 id="playerScore">0</h2>
+        </div>
+
+        <div class="score-card">
+            <span>DRAWS</span>
+            <h2 id="drawScore">0</h2>
+        </div>
+
+        <div class="score-card">
+            <span>AI (O)</span>
+            <h2 id="aiScore">0</h2>
+        </div>
+
+    </div>
+
+    <div class="game-info">
+
+        <div class="info-box">
+            <label>AI Mode:</label>
+
+            <div class="mode-badge">
+                Minimax (Unbeatable)
+            </div>
+        </div>
+
+        <div class="info-box">
+            <label>First Move:</label>
+
+            <select id="firstMove">
+                <option value="player">Player (X)</option>
+                <option value="ai">AI (O)</option>
+            </select>
+        </div>
+
+    </div>
+
+    <p class="tagline">
+        Unbeatable AI powered by Minimax Algorithm
+    </p>
+
+    <div id="status">
+        Your Turn (X)
+    </div>
+
+    <div class="board">
+
+        <div class="cell" onclick="playerMove(0)"></div>
+        <div class="cell" onclick="playerMove(1)"></div>
+        <div class="cell" onclick="playerMove(2)"></div>
+
+        <div class="cell" onclick="playerMove(3)"></div>
+        <div class="cell" onclick="playerMove(4)"></div>
+        <div class="cell" onclick="playerMove(5)"></div>
+
+        <div class="cell" onclick="playerMove(6)"></div>
+        <div class="cell" onclick="playerMove(7)"></div>
+        <div class="cell" onclick="playerMove(8)"></div>
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="new-match" onclick="resetBoard()">
+            🔄 New Match
+        </button>
+
+        <button class="reset-all" onclick="resetScores()">
+            Reset All
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
