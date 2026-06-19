@@ -1,5 +1,9 @@
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timedelta
+
+# Cloud server time ni direct ga India time (+5:30 hours) loki convert chestunnam
+utc_now = datetime.utcnow()
+ist_now = utc_now + timedelta(hours=5, minutes=30)
 # --- 1. CORE DICTIONARY (Standard Pattern Matching) ---
 rules = {
     "greetings": (["hi", "hello", "hey", "hii"], "👋 Hello {name}! How can I help you today?"),
